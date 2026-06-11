@@ -259,51 +259,14 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 #fleetV{color:var(--river-glow)}#costV{color:var(--amber)}
 
 /* =========================================================
-   SCENE 2.9 - GAP
+   SCENE 3 · CASCADE BULLETS
 ========================================================= */
-#gap {
-  padding: 16vh 0 15vh;
-}
-#gap h2 {
-  font-size: clamp(2rem, 4.4vw, 3.6rem); max-width: 25ch; margin: 0.6rem 0 1.5rem; font-weight: 800;
-}
-.gapGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 5vh;
-}
-.gapCard {
-  border: 1px solid rgba(45, 214, 232, 0.15);
-  border-radius: 14px;
-  background: rgba(10, 26, 40, 0.45);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  padding: 1.8rem 1.6rem;
-  position: relative;
-}
-.gapCard .mode {
-  font-family: var(--font-m);
-  font-size: 11px;
-  letter-spacing: .25em;
-  color: var(--river-glow);
-  text-transform: uppercase;
-}
-.gapCard h3 {
-  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
-  margin: 0.7rem 0 0.6rem;
-}
-.gapCard p {
-  color: var(--mist);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-.gapBullets {
+.casBullets {
   max-width: 760px;
   width: 100%;
   margin-top: 5vh;
 }
-.gapBullets ul {
+.casBullets ul {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -311,14 +274,14 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
   padding: 0;
   margin: 0;
 }
-.gapBullets li {
+.casBullets li {
   font-size: 0.95rem;
   color: var(--mist);
   line-height: 1.5;
   padding-left: 1.5rem;
   position: relative;
 }
-.gapBullets li::before {
+.casBullets li::before {
   content: "•";
   position: absolute;
   left: 0;
@@ -663,32 +626,10 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
     font-size: 1.5rem !important;
   }
   
-    /* Gap */
-  #gap {
-    padding: 6vh 0 !important;
-  }
-  .gapGrid {
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    gap: 10px !important;
-    width: 100vw !important;
-    margin-left: -6vw !important;
-    padding: 5px 6vw !important;
-  }
-  .gapGrid::-webkit-scrollbar {
-    display: none;
-  }
-  .gapCard {
-    flex: 0 0 85% !important;
-    scroll-snap-align: start !important;
-    padding: 1.1rem 1rem !important;
-  }
-  .gapBullets {
+  .casBullets {
     margin-top: 4vh !important;
   }
-  .gapBullets li {
+  .casBullets li {
     font-size: 0.85rem !important;
   }
 
@@ -1174,6 +1115,12 @@ body.on-light #lang-switch a:hover {
 
 
 
+
+
+
+
+
+
 /* ---------- language switcher start ---------- */
 #lang-switch {
   position: fixed;
@@ -1232,6 +1179,12 @@ body.on-light #lang-switch a:hover {
 
 <div id="lang-switch" aria-label="Language Switcher"><a href="index.html" class="active">EN</a><a href="index-fr.html">FR</a><a href="index-de.html">DE</a><a href="index-nl.html">NL</a></div>
 
+
+
+
+
+
+
 <div id="bgwash"></div>
 
 <aside id="riverNav" aria-hidden="true">
@@ -1242,8 +1195,7 @@ body.on-light #lang-switch a:hover {
     <div class="stop" data-target="crisis"   data-frac="0"    data-label="OCTOBER 2018"></div>
     <div class="stop" data-target="crisis"   data-frac="0.86" data-label="AGAIN · 2022"></div>
     
-    <div class="stop" data-target="gap"      data-frac="0"    data-label="THE GAP"></div>
-    <div class="stop" data-target="cascade"  data-frac="0"    data-label="THE CASCADE"></div>
+        <div class="stop" data-target="cascade"  data-frac="0"    data-label="THE CASCADE"></div>
     <div class="stop" data-target="solution" data-frac="0"    data-label="THE SOLUTION"></div>
     <div class="stop" data-target="arch"     data-frac="0"    data-label="ARCHITECTURE"></div>
     <div class="stop" data-target="market"   data-frac="0"    data-label="THE BUSINESS"></div>
@@ -1563,20 +1515,21 @@ body.on-light #lang-switch a:hover {
 
 
 <!-- ============ SCENE 3 · CASCADE ============ -->
-<!-- ============ SCENE 2.9 - GAP ============ -->
-<section class="scene" id="gap" style="padding: 12vh 0;">
+
+<section class="scene" id="cascade">
   <div class="wrap">
-    <div class="kicker reveal" style="color: var(--crisis);">The Gap</div>
-    <h2 class="reveal" style="font-size: clamp(2rem, 4.4vw, 3.6rem); max-width: 25ch; margin: 0.6rem 0 1.5rem; font-weight: 800;">Three modes. Four countries. Zero shared intelligence.</h2>
-    <p class="lead reveal" style="color: var(--mist); max-width: 56ch; line-height: 1.7; margin-bottom: 2rem;">How the three transport modes currently operate in disconnected silos across the corridor, making coordinated action impossible.</p>
-    
-    <div class="gapGrid">
-      <div class="gapCard reveal"><div class="mode">Barge operators</div><h3 style="margin-top: 0.5rem;">Isolated view</h3><p>Track Kaub gauges individually. React when it's already too late. No predictive layer across the corridor.</p></div>
-      <div class="gapCard reveal"><div class="mode">Rail · SNCF / DB / SBB</div><h3 style="margin-top: 0.5rem;">Siloed networks</h3><p>Operate national systems. Surge demand from barge disruptions hits them as a surprise, not a forecast.</p></div>
-      <div class="gapCard reveal"><div class="mode">Road / trucking</div><h3 style="margin-top: 0.5rem;">Reactive overflow</h3><p>Receive overflow freight with no advance notice. Last-mile pricing chaos during disruption windows.</p></div>
+    <div class="kicker reveal">The real problem</div>
+    <h2 class="reveal">The water was only the trigger. The damage came from the <b>blind cascade</b>.</h2>
+    <p class="lead reveal">Three transport modes, four countries — and zero shared intelligence between them. In 2018 and again in 2022, each one found out the hard way, weeks apart.</p>
+    <div class="casGrid">
+      <div class="casCard reveal"><span class="lagTag">DAY 0</span><div class="mode">Barge</div><h3>The river drops</h3><p>Operators watch the Kaub gauge individually and react when it is already too late. By the time it's critical, capacity is already gone — there is no predictive layer across the corridor.</p></div>
+      <div class="casArrow reveal"><span>⟶</span></div>
+      <div class="casCard reveal"><span class="lagTag">+ DAYS</span><div class="mode">Rail · SNCF / DB / SBB</div><h3>Surge hits as a surprise</h3><p>Overflow demand slams national rail systems (SNCF / DB / SBB) with no forecast. Surge demand hits them as a surprise, slots sell out, and cargo queues. Three networks, three languages, no shared signal.</p></div>
+      <div class="casArrow reveal"><span>⟶</span></div>
+      <div class="casCard reveal"><span class="lagTag">+ WEEKS</span><div class="mode">Road</div><h3>Last-mile chaos</h3><p>Trucking absorbs overflow freight with no advance notice. Last-mile pricing chaos during disruption windows causes costs to spiral exactly when shippers can least absorb them.</p></div>
     </div>
     
-    <div class="gapBullets reveal">
+    <div class="casBullets reveal">
       <ul>
         <li>
           No product connects all three modes across FR/DE/CH/NL as a single intelligence layer.
@@ -1592,21 +1545,7 @@ body.on-light #lang-switch a:hover {
         </li>
       </ul>
     </div>
-  </div>
-</section>
-
-<section class="scene" id="cascade">
-  <div class="wrap">
-    <div class="kicker reveal">The real problem</div>
-    <h2 class="reveal">The water was only the trigger. The damage came from the <b>blind cascade</b>.</h2>
-    <p class="lead reveal">Three transport modes, four countries — and zero shared intelligence between them. In 2018 and again in 2022, each one found out the hard way, weeks apart.</p>
-    <div class="casGrid">
-      <div class="casCard reveal"><span class="lagTag">DAY 0</span><div class="mode">Barge</div><h3>The river drops</h3><p>Operators watch the Kaub gauge individually and react when it is already too late. By the time it's critical, capacity is already gone — there is no predictive layer across the corridor.</p></div>
-      <div class="casArrow reveal"><span>⟶</span></div>
-      <div class="casCard reveal"><span class="lagTag">+ DAYS</span><div class="mode">Rail · SNCF / DB / SBB</div><h3>Surge hits as a surprise</h3><p>Overflow demand slams national rail systems (SNCF / DB / SBB) with no forecast. Surge demand hits them as a surprise, slots sell out, and cargo queues. Three networks, three languages, no shared signal.</p></div>
-      <div class="casArrow reveal"><span>⟶</span></div>
-      <div class="casCard reveal"><span class="lagTag">+ WEEKS</span><div class="mode">Road</div><h3>Last-mile chaos</h3><p>Trucking absorbs overflow freight with no advance notice. Last-mile pricing chaos during disruption windows causes costs to spiral exactly when shippers can least absorb them.</p></div>
-    </div>
+    
     <div class="casBottom reveal">The cascade is predictable. <b>The response never was.</b> Until now.</div>
   </div>
 </section>
@@ -1696,7 +1635,7 @@ body.on-light #lang-switch a:hover {
     <div class="localGrid" style="margin-top: 4vh;">
       <div class="loc reveal">
         <div class="d">Business Model</div>
-        <h3>Aasta</h3>
+        <h3>Aastha</h3>
         <p>Revenue streams, pricing, market segmentation, and go-to-market strategy.</p>
       </div>
       <div class="loc reveal">
@@ -1955,7 +1894,7 @@ function snapTargets(){
   const t=[0];
   const o=document.getElementById('orbit');t.push(o.offsetTop+0.82*(o.offsetHeight-innerHeight));
   const c=document.getElementById('crisis');t.push(c.offsetTop);t.push(c.offsetTop+0.86*(c.offsetHeight-innerHeight));
-  ['tryit','gap','cascade','solution','arch','market','roadmap','team','local'].forEach(id=>t.push(document.getElementById(id).offsetTop));
+  ['tryit','cascade','solution','arch','market','roadmap','team','local'].forEach(id=>t.push(document.getElementById(id).offsetTop));
   return t;
 }
 addEventListener('keydown',e=>{
