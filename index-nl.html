@@ -274,9 +274,11 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
   margin-top: 5vh;
 }
 .gapCard {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(45, 214, 232, 0.15);
   border-radius: 14px;
-  background: var(--panel);
+  background: rgba(10, 26, 40, 0.45);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   padding: 1.8rem 1.6rem;
   position: relative;
 }
@@ -1134,7 +1136,45 @@ body.on-light #lang-switch a:hover {
 }
 
 
-/* ---------- language switcher ---------- */
+
+#lang-switch a {
+  color: var(--mist);
+  text-decoration: none;
+  transition: color .25s;
+  cursor: pointer;
+}
+#lang-switch a.active {
+  color: var(--river-glow);
+  font-weight: bold;
+}
+#lang-switch a:hover {
+  color: var(--river-glow);
+}
+body.on-light #lang-switch {
+  background: rgba(244,248,250,.85);
+  border-color: #A9C0CC;
+}
+body.on-light #lang-switch a {
+  color: var(--d-muted);
+}
+body.on-light #lang-switch a.active {
+  color: var(--d-teal);
+}
+body.on-light #lang-switch a:hover {
+  color: var(--d-teal);
+}
+@media(max-width:760px){
+  #lang-switch {
+    top: 12px;
+    right: 12px;
+    padding: 4px 8px;
+  }
+}
+
+
+
+
+/* ---------- language switcher start ---------- */
 #lang-switch {
   position: fixed;
   top: 18px;
@@ -1185,25 +1225,12 @@ body.on-light #lang-switch a:hover {
   }
 }
 
+/* ---------- language switcher end ---------- */
 </style>
 </head>
 <body>
 
 <div id="lang-switch" aria-label="Taalkeuze"><a href="index.html">EN</a><a href="index-fr.html">FR</a><a href="index-de.html">DE</a><a href="index-nl.html" class="active">NL</a></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div id="bgwash"></div>
 
@@ -1214,7 +1241,7 @@ body.on-light #lang-switch a:hover {
     <div class="stop" data-target="orbit"    data-frac="0.82" data-label="DE CORRIDOR"></div>
     <div class="stop" data-target="crisis"   data-frac="0"    data-label="OKTOBER 2018"></div>
     <div class="stop" data-target="crisis"   data-frac="0.86" data-label="OPNIEUW · 2022"></div>
-    <div class="stop" data-target="multimodal" data-frac="0"   data-label="MULTIMODAAL"></div>
+    
     <div class="stop" data-target="gap"      data-frac="0"    data-label="DE KLOOF"></div>
     <div class="stop" data-target="cascade"  data-frac="0"    data-label="DE CASCADING"></div>
     <div class="stop" data-target="solution" data-frac="0"    data-label="DE OPLOSSING"></div>
@@ -1533,59 +1560,7 @@ body.on-light #lang-switch a:hover {
 </section>
 
 <!-- ============ SCENE 2.8 · MULTIMODAL (dark) ============ -->
-<section class="scene" id="multimodal" style="padding: 12vh 0;">
-  <div class="wrap" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center;">
-    <div>
-      <div class="kicker reveal">Multimodale informatie over vrachtstoringen</div>
-      <h1 class="reveal" style="font-size: clamp(3rem, 6vw, 5rem); color: var(--ice); margin: 0.5rem 0 1.5rem;">LogiRhein Live</h1>
-      <p class="lead reveal" style="font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--mist); line-height: 1.6; max-width: 45ch; margin-bottom: 2.5rem;">
-        Het elimineren van blinde vlekken in de Rijncorridor met real-time storingsinformatie.
-      </p>
-      
 
-    </div>
-    
-    <div class="reveal" style="max-width: 400px; width: 100%; margin: 0 auto;">
-      <svg viewBox="0 0 400 500" style="width: 100%; height: auto; overflow: visible;">
-        <!-- Rhine path -->
-        <path d="M 200,50 C 220,150 160,250 210,350 C 230,380 200,420 200,450" fill="none" stroke="rgba(45,214,232,0.15)" stroke-width="8" stroke-linecap="round" />
-        <path d="M 200,50 C 220,150 160,250 210,350 C 230,380 200,420 200,450" fill="none" stroke="var(--river)" stroke-width="3" stroke-linecap="round" />
-        
-        <!-- Rotterdam dot -->
-        <circle cx="200" cy="50" r="6" fill="var(--river-glow)" />
-        <text x="215" y="54" fill="var(--ice)" font-family="var(--font-m)" font-size="11" letter-spacing="0.05em">Rotterdam</text>
-        
-        <!-- Kaub dot -->
-        <circle cx="180" cy="200" r="6" fill="var(--amber)" />
-        <!-- Line from Kaub to Callout -->
-        <line x1="180" y1="200" x2="220" y2="180" stroke="var(--amber)" stroke-dasharray="3 3" stroke-width="1" />
-        
-        <!-- Callout 1 (Kaub) -->
-        <g transform="translate(225, 145)">
-          <rect x="0" y="0" width="165" height="56" rx="6" fill="rgba(10,26,40,0.85)" stroke="var(--line)" stroke-width="1" />
-          <text x="12" y="18" fill="var(--ice)" font-family="var(--font-d)" font-weight="700" font-size="10" letter-spacing="0.02em">Intermodaal risico</text>
-          <text x="12" y="32" fill="var(--amber)" font-family="var(--font-d)" font-size="10" font-weight="700">Knelpunt Kaub</text>
-          <text x="12" y="46" fill="var(--mist)" font-family="var(--font-m)" font-size="8.5" letter-spacing="0.02em">Spoor aanbevolen</text>
-        </g>
-
-        <!-- Strasbourg dot -->
-        <circle cx="205" cy="340" r="6" fill="var(--crisis)" />
-        <text x="120" y="344" fill="var(--ice)" font-family="var(--font-m)" font-size="11" letter-spacing="0.05em">Strasbourg</text>
-        
-        <!-- Line from path to Callout 2 -->
-        <line x1="190" y1="290" x2="160" y2="280" stroke="var(--river-glow)" stroke-dasharray="3 3" stroke-width="1" />
-        
-        <!-- Callout 2 (AI Copilot) -->
-        <g transform="translate(5, 250)">
-          <rect x="0" y="0" width="145" height="56" rx="6" fill="rgba(10,26,40,0.85)" stroke="var(--line)" stroke-width="1" />
-          <text x="10" y="16" fill="var(--mist)" font-family="var(--font-m)" font-size="8" letter-spacing="0.02em">AI-copilootactie</text>
-          <text x="10" y="30" fill="var(--river-glow)" font-family="var(--font-d)" font-size="10" font-weight="700">Verschuif 20% naar weg</text>
-          <text x="10" y="44" fill="var(--mist)" font-family="var(--font-m)" font-size="8" letter-spacing="0.02em">ETA verminderd: -14 uur</text>
-        </g>
-      </svg>
-    </div>
-  </div>
-</section>
 
 <!-- ============ SCENE 3 · CASCADE ============ -->
 <!-- ============ SCENE 2.9 - GAP ============ -->
@@ -1980,7 +1955,7 @@ function snapTargets(){
   const t=[0];
   const o=document.getElementById('orbit');t.push(o.offsetTop+0.82*(o.offsetHeight-innerHeight));
   const c=document.getElementById('crisis');t.push(c.offsetTop);t.push(c.offsetTop+0.86*(c.offsetHeight-innerHeight));
-  ['tryit','multimodal','gap','cascade','solution','arch','market','roadmap','team','local'].forEach(id=>t.push(document.getElementById(id).offsetTop));
+  ['tryit','gap','cascade','solution','arch','market','roadmap','team','local'].forEach(id=>t.push(document.getElementById(id).offsetTop));
   return t;
 }
 addEventListener('keydown',e=>{
