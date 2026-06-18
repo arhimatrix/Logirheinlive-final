@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogiRhein Live — Corporate Strategy 2026–2030</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:   #2DD6E8;
+  --teal2:  #0E7A8A;
+  --crisis: #FF5A48;
+  --amber:  #FFB454;
+  --green:  #4ADE80;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Archivo', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* The scroll-driver: JS sets --bg and --fg on body each frame */
+body {
+  font-family: var(--sans);
+  overflow-x: hidden;
+  background-color: var(--bg, #0D1A26);
+  color: var(--fg, #F0EDE8);
+  transition: background-color .05s linear, color .05s linear;
+}
+
+/* ─── LEFT NAV ─── */
+.nav-track-line {
+  position: fixed; left: 30px; top: 8%; bottom: 8%; z-index: 499;
+  width: 1px; background: rgba(45,214,232,0.2); pointer-events: none;
+}
+.ndot {
+  position: fixed; left: 27px; width: 7px; height: 7px; border-radius: 50%;
+  border: 1px solid rgba(45,214,232,0.45); background: transparent;
+  cursor: pointer; z-index: 500; transition: background .25s, transform .2s;
+}
+.ndot:hover, .ndot.lit { background: var(--teal); border-color: var(--teal); transform: scale(1.4); }
+
+/* ─── TOP NAV ─── */
+.topnav {
+  position: fixed; top: 0; right: 0; left: 0; z-index: 600;
+  display: flex; align-items: center;
+  padding: .8rem 2.5rem;
+  background: rgba(13,26,38,0.82);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(45,214,232,0.08);
+}
+.topnav-logo { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--teal); font-weight: 700; text-transform: uppercase; margin-right: auto; }
+.topnav a { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: rgba(240,237,232,0.4); text-decoration: none; text-transform: uppercase; margin-left: 2rem; transition: color .2s; }
+.topnav a:hover { color: var(--teal); }
+
+/* ─── SECTION SYSTEM ─── */
+/* All sections transparent — body bg does the work */
+section {
+  position: relative;
+  padding: 7rem 5rem 5rem;
+  min-height: 90vh;
+  display: flex; flex-direction: column; justify-content: center;
+}
+@media(max-width:900px){ section { padding: 5rem 2rem 3rem; } }
+section.short { min-height: auto; padding: 5rem 5rem 4rem; }
+.w { max-width: 1060px; }
+
+/* ─── COLOUR-ADAPTIVE TEXT ─── */
+/* JS adds .phase-dark or .phase-light to body */
+body.phase-dark  { --fg: #F0EDE8; --fg2: rgba(240,237,232,0.55); --fg3: rgba(240,237,232,0.28); --card-bg: rgba(255,255,255,0.04); --card-border: rgba(240,237,232,0.1); --eyebrow-col: #FF5A48; }
+body.phase-light { --fg: #0F1E2A; --fg2: #4A6070; --fg3: rgba(15,30,42,0.35); --card-bg: rgba(255,255,255,0.75); --card-border: rgba(15,30,42,0.1); --eyebrow-col: #0E7A8A; }
+body.phase-mid   { --fg: #E8F4F8; --fg2: rgba(232,244,248,0.6); --fg3: rgba(232,244,248,0.28); --card-bg: rgba(255,255,255,0.06); --card-border: rgba(232,244,248,0.12); --eyebrow-col: #2DD6E8; }
+
+/* ─── TYPOGRAPHY ─── */
+.eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; margin-bottom: .8rem; display: block; color: var(--eyebrow-col, #FF5A48); }
+h1 { font-size: clamp(3.8rem,7.5vw,7rem); font-weight: 900; line-height: .97; letter-spacing: -.03em; color: var(--fg); }
+h2 { font-size: clamp(2.4rem,5vw,4.2rem); font-weight: 700; line-height: 1.06; letter-spacing: -.022em; color: var(--fg); }
+h3 { font-size: 1.1rem; font-weight: 700; color: var(--fg); }
+h4 { font-size: .9rem; font-weight: 700; color: var(--fg); }
+p, li { color: var(--fg2); }
+.t-teal   { color: var(--teal)   !important; }
+.t-crisis { color: var(--crisis) !important; }
+.t-amber  { color: var(--amber)  !important; }
+.t-teal2  { color: var(--teal2)  !important; }
+.t-muted  { color: var(--fg2); }
+.t-very-muted { color: var(--fg3); }
+
+/* ─── HERO ─── */
+#hero { min-height: 100vh; padding-top: 9rem; }
+#hero::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background: repeating-linear-gradient(0deg,transparent,transparent 119px,rgba(45,214,232,0.025) 120px),
+              repeating-linear-gradient(90deg,transparent,transparent 119px,rgba(45,214,232,0.025) 120px),
+              radial-gradient(ellipse 70% 60% at 72% 50%,rgba(45,214,232,0.06) 0%,transparent 65%);
+}
+.hero-kicker { font-family:var(--mono); font-size:11px; letter-spacing:.22em; color:var(--teal); text-transform:uppercase; margin-bottom:1.6rem; display:block; }
+.mission-block { border-left:3px solid var(--teal); border:1px solid rgba(45,214,232,0.2); border-left-width:3px; background:rgba(45,214,232,0.05); border-radius:6px; padding:1.6rem 2rem; max-width:680px; margin-bottom:3.2rem; }
+.mission-block .lbl { font-family:var(--mono); font-size:9px; letter-spacing:.2em; color:rgba(240,237,232,0.28); text-transform:uppercase; margin-bottom:.55rem; display:block; }
+.mission-block p { font-size:1.07rem; line-height:1.78; color:#F0EDE8 !important; }
+.mission-block em { color:var(--teal); font-style:normal; font-weight:700; }
+.hero-stats { display:flex; gap:2.8rem; flex-wrap:wrap; }
+.hs { border-left:2px solid var(--crisis); padding-left:1.2rem; }
+.hs-n { font-family:var(--mono); font-size:2.2rem; font-weight:700; color:var(--crisis); line-height:1; }
+.hs-l { font-family:var(--mono); font-size:9px; letter-spacing:.11em; color:rgba(240,237,232,0.3); text-transform:uppercase; margin-top:.3rem; }
+
+/* ─── PILLARS ─── */
+.pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:2.8rem; border-radius:8px; overflow:hidden; border:1px solid var(--card-border); background:var(--card-border); }
+@media(max-width:720px){ .pillars { grid-template-columns:1fr; } }
+.pillar { background:var(--card-bg); backdrop-filter:blur(4px); padding:2rem 1.8rem; position:relative; }
+.pillar::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.pillar:nth-child(1)::before { background:var(--crisis); }
+.pillar:nth-child(2)::before { background:var(--teal); }
+.pillar:nth-child(3)::before { background:var(--amber); }
+.pnum { font-family:var(--mono); font-size:9px; letter-spacing:.18em; color:var(--fg3); text-transform:uppercase; margin-bottom:.6rem; display:block; }
+
+/* ─── DIAGRAM ─── */
+.diagram-box { margin-top:2.5rem; background:var(--card-bg); backdrop-filter:blur(6px); border:1px solid var(--card-border); border-radius:10px; padding:2rem 2.5rem; position:relative; overflow:hidden; }
+.diagram-box::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 55% 45% at 50% 50%,rgba(45,214,232,0.04) 0%,transparent 70%); }
+
+/* ─── MATRIX ─── */
+.mx-row { display:flex; gap:8px; margin-bottom:8px; }
+.mx-row-lbl { width:110px; flex-shrink:0; display:flex; align-items:center; justify-content:flex-end; padding-right:10px; font-family:var(--mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; text-align:right; line-height:1.4; }
+.mx-row-lbl.hi { color:var(--crisis); }
+.mx-row-lbl.lo { color:var(--fg3); }
+.mxcell { flex:1; border-radius:8px; padding:1.2rem 1.4rem; border:1px solid var(--card-border); background:var(--card-bg); }
+.mxcell.primary { border-color:rgba(255,90,72,0.4); background:rgba(255,90,72,0.08); }
+.mxcell.warm    { border-color:rgba(255,180,84,0.32); background:rgba(255,180,84,0.06); }
+.mxcell.cool    { border-color:rgba(45,214,232,0.25); background:rgba(45,214,232,0.05); }
+.mxhd { display:flex; align-items:center; gap:.45rem; margin-bottom:.4rem; }
+.mxdot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.mxdot.r{background:var(--crisis);} .mxdot.a{background:var(--amber);} .mxdot.t{background:var(--teal);}
+.mxcell h4.r{color:var(--crisis);} .mxcell h4.a{color:var(--amber);} .mxcell h4.t{color:var(--teal);}
+.mxcell p { font-size:.79rem; line-height:1.58; margin-top:.3rem; }
+.mxtag { font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; margin-top:.55rem; display:block; }
+.mxcell.primary .mxtag{color:rgba(255,90,72,0.55);} .mxcell.warm .mxtag{color:rgba(255,180,84,0.55);} .mxcell.cool .mxtag{color:rgba(45,214,232,0.45);}
+.mxleg { display:flex; gap:1.5rem; margin-top:1rem; padding-left:118px; flex-wrap:wrap; }
+.mxleg span { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; display:flex; align-items:center; gap:.4rem; color:var(--fg3); }
+
+/* ─── ARCHETYPES ─── */
+.seg-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:2rem; }
+.seg-tab { font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase; padding:.5rem 1.1rem; border-radius:4px; background:transparent; cursor:pointer; border:1px solid var(--card-border); color:var(--fg2); transition:all .2s; }
+.seg-tab:hover { border-color:var(--teal2); color:var(--teal2); }
+.seg-tab.active { background:var(--fg); color:#0F1E2A; border-color:var(--fg); }
+.persona { display:none; background:rgba(255,255,255,0.85); border:1px solid rgba(15,30,42,0.1); border-radius:10px; overflow:hidden; }
+.persona.on { display:grid; grid-template-columns:240px 1fr; }
+@media(max-width:720px){ .persona.on { grid-template-columns:1fr; } }
+.ps { background:#F2F5F8; padding:2rem 1.6rem; border-right:1px solid rgba(15,30,42,0.08); }
+.ps-av { width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:.9rem; }
+.ps-name { font-size:.95rem; font-weight:700; color:#0F1E2A; margin-bottom:.15rem; }
+.ps-role { font-family:var(--mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:rgba(15,30,42,0.38); margin-bottom:.9rem; line-height:1.5; }
+.ps-tag { display:inline-block; font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; padding:.18rem .5rem; border-radius:3px; margin:2px; text-transform:uppercase; }
+.ps-bio { font-size:.8rem; color:#4A6070; line-height:1.65; margin-top:.8rem; }
+.pb { padding:2rem; }
+.jlbl { font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(15,30,42,0.32); margin-bottom:.5rem; display:block; }
+.jr { font-size:.85rem; color:#4A6070; padding:.4rem .7rem; border-left:2px solid rgba(15,30,42,0.1); margin-bottom:.32rem; line-height:1.5; }
+.jr.hire{border-left-color:#0E7A8A;} .jr.pain{border-left-color:var(--crisis);} .jr.gain{border-left-color:#16a34a;}
+.jsec { margin-bottom:1.3rem; }
+.pitch { margin-top:1.3rem; background:#EEF4F7; border:1px solid rgba(14,122,138,0.18); border-left:3px solid var(--teal2); border-radius:5px; padding:.9rem 1.1rem; }
+.pitch-lbl { font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal2); margin-bottom:.35rem; font-weight:700; display:block; }
+.pitch p { font-size:.875rem; color:#0F1E2A !important; font-style:italic; line-height:1.65; }
+
+/* ─── JOURNEY ─── */
+.jscroll { overflow-x:auto; padding-bottom:1.2rem; margin:1.5rem -5rem 0; padding-left:5rem; padding-right:5rem; }
+.jscroll::-webkit-scrollbar{height:2px;} .jscroll::-webkit-scrollbar-thumb{background:var(--teal);}
+.jrail { display:flex; min-width:max-content; position:relative; }
+.jrail::before { content:''; position:absolute; top:46px; left:0; right:0; height:1px; background:linear-gradient(to right,var(--crisis),var(--amber),var(--teal),#4ADE80); opacity:.3; }
+.jstep { width:195px; flex-shrink:0; padding:0 9px; }
+.jdot { width:11px; height:11px; border-radius:50%; border:2px solid; background:transparent; margin:41px auto .85rem; position:relative; z-index:2; transition:transform .2s; }
+.jstep:hover .jdot { transform:scale(1.6); }
+.jphase { font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; text-align:center; margin-bottom:.5rem; }
+.jcard { background:var(--card-bg); border:1px solid var(--card-border); border-radius:7px; padding:.85rem .95rem; }
+.jcard h4 { font-size:.82rem; font-weight:700; margin-bottom:.38rem; }
+.jcard ul { list-style:none; }
+.jcard li { font-size:.75rem; padding:.17rem 0 .17rem .72rem; position:relative; }
+.jcard li::before { content:'→'; position:absolute; left:0; color:var(--fg3); font-size:.63rem; top:.2rem; }
+.jq { margin-top:.45rem; padding:.3rem .5rem; background:rgba(0,0,0,0.06); border-radius:3px; font-size:.72rem; color:var(--fg3); font-style:italic; line-height:1.4; }
+.ja .jdot,.ja .jphase{border-color:var(--crisis);color:var(--crisis);}
+.je .jdot,.je .jphase{border-color:var(--amber);color:var(--amber);}
+.jp .jdot,.jp .jphase{border-color:var(--teal);color:var(--teal);}
+.js2 .jdot,.js2 .jphase{border-color:var(--teal2);color:var(--teal2);}
+.jg .jdot,.jg .jphase{border-color:#4ADE80;color:#4ADE80;}
+
+/* ─── HORIZONS ─── */
+.hz-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:2.5rem; }
+@media(max-width:720px){ .hz-row{grid-template-columns:1fr;} }
+.hz { background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; overflow:hidden; }
+.hz-hd { padding:1.4rem 1.6rem; border-bottom:1px solid var(--card-border); }
+.hz-num { font-family:var(--mono); font-size:3rem; font-weight:700; line-height:1; opacity:.12; }
+.hz-title { font-size:.95rem; font-weight:700; margin-top:.15rem; }
+.hz-period { font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--fg3); margin-top:.2rem; }
+.hz-body { padding:1.4rem 1.6rem; }
+.hz-goal { font-size:.83rem; line-height:1.65; margin-bottom:1rem; }
+.hz-kpis { list-style:none; }
+.hz-kpis li { font-size:.83rem; padding:.38rem 0; border-bottom:1px solid var(--card-border); display:flex; justify-content:space-between; }
+.hz-kpis li:last-child{border-bottom:none;}
+.kv { font-family:var(--mono); font-size:.83rem; font-weight:700; }
+.hz1 .hz-num,.hz1 .kv{color:var(--crisis);} .hz2 .hz-num,.hz2 .kv{color:var(--amber);} .hz3 .hz-num,.hz3 .kv{color:var(--teal2);}
+.hz1 .hz-hd{border-top:3px solid var(--crisis);} .hz2 .hz-hd{border-top:3px solid var(--amber);} .hz3 .hz-hd{border-top:3px solid var(--teal2);}
+
+/* ─── TIMELINE ─── */
+.tl { margin-top:2.5rem; padding-left:44px; position:relative; }
+.tl::before { content:''; position:absolute; left:13px; top:4px; bottom:4px; width:1px; background:linear-gradient(to bottom,var(--crisis),var(--amber),var(--teal2),#22c55e); opacity:.35; }
+.tr { position:relative; margin-bottom:2.4rem; }
+.tdot { position:absolute; left:-38px; top:4px; width:14px; height:14px; border-radius:50%; border:2px solid; background:transparent; }
+.tr:nth-child(1) .tdot{border-color:var(--crisis); background:transparent;}
+.tr:nth-child(2) .tdot{border-color:var(--amber);}
+.tr:nth-child(3) .tdot{border-color:var(--teal2);}
+.tr:nth-child(4) .tdot{border-color:#22c55e;}
+.ty { font-family:var(--mono); font-size:10px; letter-spacing:.16em; font-weight:700; text-transform:uppercase; margin-bottom:.4rem; display:block; }
+.tr:nth-child(1) .ty{color:var(--crisis);} .tr:nth-child(2) .ty{color:var(--amber);} .tr:nth-child(3) .ty{color:var(--teal2);} .tr:nth-child(4) .ty{color:#22c55e;}
+.tc h3 { font-size:1rem; margin-bottom:.4rem; }
+.tmkts { display:flex; flex-wrap:wrap; gap:5px; margin-top:.65rem; }
+.tm { font-family:var(--mono); font-size:9px; letter-spacing:.1em; padding:.2rem .6rem; border-radius:3px; text-transform:uppercase; border:1px solid var(--card-border); }
+
+/* ─── CTA ─── */
+#cta { min-height:80vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem; }
+.cta-inner { max-width:640px; }
+.cta-btn { display:inline-block; padding:.9rem 2.5rem; background:var(--crisis); color:#fff; font-weight:700; font-size:.95rem; border-radius:5px; text-decoration:none; border:none; cursor:pointer; transition:background .2s,transform .15s; }
+.cta-btn:hover{background:#ff2e1a;transform:translateY(-2px);}
+.cta-meta { font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--fg3); text-transform:uppercase; margin-top:1.6rem; }
+
+footer { border-top:1px solid var(--card-border); padding:1.4rem 5rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; color:var(--fg3); text-transform:uppercase; }
+
+/* ─── REVEAL ─── */
+.rv { opacity:0; transform:translateY(20px); transition:opacity .7s ease,transform .7s ease; }
+.rv.in { opacity:1; transform:none; }
+.d1 { transition-delay:.1s; } .d2 { transition-delay:.2s; } .d3 { transition-delay:.3s; }
+</style>
+</head>
+<body class="phase-dark">
+
+<!-- Left nav track -->
+<div class="nav-track-line"></div>
+<div class="ndot" id="d0" style="top:130px" onclick="go('hero')"></div>
+<div class="ndot" id="d1" style="top:175px" onclick="go('pillars')"></div>
+<div class="ndot" id="d2" style="top:220px" onclick="go('stakeholders')"></div>
+<div class="ndot" id="d3" style="top:265px" onclick="go('matrix')"></div>
+<div class="ndot" id="d4" style="top:310px" onclick="go('archetypes')"></div>
+<div class="ndot" id="d5" style="top:355px" onclick="go('journey')"></div>
+<div class="ndot" id="d6" style="top:400px" onclick="go('strategy')"></div>
+<div class="ndot" id="d7" style="top:445px" onclick="go('global')"></div>
+<div class="ndot" id="d8" style="top:490px" onclick="go('cta')"></div>
+
+<!-- Top nav -->
+<nav class="topnav">
+  <span class="topnav-logo">LogiRhein Live</span>
+  <a href="#" onclick="go('hero')">Mission</a>
+  <a href="#" onclick="go('stakeholders')">Ecosystem</a>
+  <a href="#" onclick="go('archetypes')">Customers</a>
+  <a href="#" onclick="go('journey')">Journey</a>
+  <a href="#" onclick="go('strategy')">Plan</a>
+  <a href="#" onclick="go('global')">Global</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="w" style="position:relative;z-index:1;">
+    <span class="hero-kicker rv">Strategic Corporate Plan · 2026–2030</span>
+    <h1 class="rv d1">Logistics<br>without<br><span class="t-teal">blind spots.</span></h1>
+    <div class="mission-block rv d2" style="margin-top:2.2rem;">
+      <span class="lbl">Mission Statement</span>
+      <p>We exist to make <em>every logistics decision smarter</em> — eliminating the friction, opacity, and surprise that costs the freight industry billions every year. From a single river gauge in Strasbourg to a <em>seamless, borderless intelligence network</em> connecting every critical corridor on the planet.</p>
+    </div>
+    <div class="hero-stats rv d3">
+      <div class="hs"><div class="hs-n">€80B</div><div class="hs-l">Rhine freight value</div></div>
+      <div class="hs"><div class="hs-n">–27%</div><div class="hs-l">Tonnage 2022 crisis</div></div>
+      <div class="hs"><div class="hs-n">0</div><div class="hs-l">Warning systems today</div></div>
+      <div class="hs"><div class="hs-n">2–4wk</div><div class="hs-l">Our horizon</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PILLARS ═══ -->
+<section id="pillars" class="short">
+  <div class="w rv">
+    <span class="eyebrow">Three bets that change the game</span>
+    <h2>LogiRhein Live is built on <span class="t-teal">three irreversible shifts.</span></h2>
+    <div class="pillars rv d1">
+      <div class="pillar"><span class="pnum">01 · Intelligence Layer</span><h3>See further</h3><p>Satellite-fused, gauge-verified water level data — integrated with ERA5 weather forecasts, rail capacity feeds from DB/SNCF/SBB, and road freight indices. A complete picture, not just a river gauge, at 2–4 week horizon.</p></div>
+      <div class="pillar"><span class="pnum">02 · AI Layer</span><h3>Act faster</h3><p>AI briefings in four languages — EN, DE, FR, NL — with alert subscriptions and API-ready feeds so logistics teams act on insight, not just receive it. Language coverage scales with every new corridor we enter.</p></div>
+      <div class="pillar"><span class="pnum">03 · Platform</span><h3>Scale everywhere</h3><p>The Rhine model deploys on any waterway — and beyond. The 2026 Hormuz crisis proved that disruption isn't just river-level: our platform learns from every event, maritime chokepoints included, and gets smarter with every corridor added.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STAKEHOLDERS ═══ -->
+<section id="stakeholders" class="short">
+  <div class="w rv">
+    <span class="eyebrow">Ecosystem Map</span>
+    <h2>The full <span class="t-teal">stakeholder web.</span></h2>
+    <p class="t-muted rv d1" style="font-size:.95rem;line-height:1.72;max-width:580px;margin:.5rem 0 0;">LogiRhein Live sits at the intersection of operations, regulation, finance, and infrastructure. Understanding every node is how we sell — and how we win.</p>
+    <div class="diagram-box rv d1">
+      <svg viewBox="0 0 960 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;position:relative;z-index:1;">
+        <defs>
+          <marker id="ar" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="rgba(180,200,220,0.25)"/></marker>
+          <marker id="arr" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="rgba(255,90,72,0.4)"/></marker>
+        </defs>
+        <rect x="370" y="190" width="220" height="88" rx="9" fill="rgba(45,214,232,0.1)" stroke="#2DD6E8" stroke-width="1.5"/>
+        <text x="480" y="227" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="700" fill="#2DD6E8">LOGIRHEIN LIVE</text>
+        <text x="480" y="246" text-anchor="middle" font-family="IBM Plex Mono" font-size="9.5" fill="rgba(45,214,232,0.6)">Intelligence Platform · Strasbourg</text>
+        <text x="480" y="262" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="rgba(45,214,232,0.4)">SaaS API · 2–4 week horizon</text>
+        <rect x="55" y="18" width="148" height="62" rx="6" fill="rgba(14,122,138,0.13)" stroke="rgba(14,122,138,0.48)" stroke-width="1"/><text x="129" y="44" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#0E7A8A">COPERNICUS</text><text x="129" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">ESA · Sentinel 1/2 · ERA5</text><text x="129" y="72" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">Open satellite data</text>
+        <rect x="232" y="18" width="148" height="62" rx="6" fill="rgba(14,122,138,0.13)" stroke="rgba(14,122,138,0.48)" stroke-width="1"/><text x="306" y="44" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#0E7A8A">PEGELONLINE</text><text x="306" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">Live gauge API · Kaub</text><text x="306" y="72" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">Real-time water level</text>
+        <rect x="412" y="18" width="148" height="62" rx="6" fill="rgba(14,122,138,0.13)" stroke="rgba(14,122,138,0.48)" stroke-width="1"/><text x="486" y="44" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#0E7A8A">CCNR · ISU</text><text x="486" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">Regulatory + academic</text><text x="486" y="72" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">Strasbourg anchor</text>
+        <rect x="592" y="18" width="148" height="62" rx="6" fill="rgba(14,122,138,0.13)" stroke="rgba(14,122,138,0.48)" stroke-width="1"/><text x="666" y="44" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#0E7A8A">TERRA / EU</text><text x="666" y="59" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">Horizon Europe + CEF</text><text x="666" y="72" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(14,122,138,0.6)">R&amp;D + grant pathway</text>
+        <rect x="24" y="175" width="162" height="58" rx="6" fill="rgba(255,90,72,0.09)" stroke="rgba(255,90,72,0.4)" stroke-width="1"/><text x="105" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FF5A48">FREIGHT OPS</text><text x="105" y="215" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,90,72,0.6)">Contargo · Rhenus · HGK</text><text x="105" y="227" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,90,72,0.6)">Fleet operators · Primary</text>
+        <rect x="24" y="268" width="162" height="58" rx="6" fill="rgba(255,90,72,0.09)" stroke="rgba(255,90,72,0.4)" stroke-width="1"/><text x="105" y="293" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FF5A48">PORT OPS</text><text x="105" y="308" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,90,72,0.6)">Port de Strasbourg</text><text x="105" y="320" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,90,72,0.6)">Port of Rotterdam</text>
+        <rect x="774" y="175" width="162" height="58" rx="6" fill="rgba(255,90,72,0.09)" stroke="rgba(255,90,72,0.4)" stroke-width="1"/><text x="855" y="200" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FF5A48">INDUSTRIALS</text><text x="855" y="215" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,90,72,0.6)">BASF · ThyssenKrupp</text><text x="855" y="227" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,90,72,0.6)">Chemical / energy sector</text>
+        <rect x="774" y="268" width="162" height="58" rx="6" fill="rgba(255,180,84,0.09)" stroke="rgba(255,180,84,0.36)" stroke-width="1"/><text x="855" y="293" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FFB454">INSURERS</text><text x="855" y="308" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.6)">Marine underwriters</text><text x="855" y="320" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.6)">Risk pricing data</text>
+        <rect x="104" y="402" width="144" height="58" rx="6" fill="rgba(255,180,84,0.09)" stroke="rgba(255,180,84,0.33)" stroke-width="1"/><text x="176" y="427" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FFB454">EU / CEF</text><text x="176" y="442" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">CEF Transport · TEN-T</text><text x="176" y="454" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">Grant pathway 2026</text>
+        <rect x="276" y="402" width="144" height="58" rx="6" fill="rgba(255,180,84,0.09)" stroke="rgba(255,180,84,0.33)" stroke-width="1"/><text x="348" y="427" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FFB454">TMS / ERP</text><text x="348" y="442" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">SAP · Oracle · API</text><text x="348" y="454" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">Integration layer</text>
+        <rect x="448" y="402" width="144" height="58" rx="6" fill="rgba(255,180,84,0.09)" stroke="rgba(255,180,84,0.33)" stroke-width="1"/><text x="520" y="427" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FFB454">REGULATORS</text><text x="520" y="442" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">WSV · VNF · Compliance</text><text x="520" y="454" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">Germany · France</text>
+        <rect x="620" y="402" width="144" height="58" rx="6" fill="rgba(255,180,84,0.09)" stroke="rgba(255,180,84,0.33)" stroke-width="1"/><text x="692" y="427" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" font-weight="700" fill="#FFB454">4PL / LSP</text><text x="692" y="442" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">DHL · Kuehne+Nagel</text><text x="692" y="454" text-anchor="middle" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(255,180,84,0.58)">Channel partners</text>
+        <line x1="129" y1="80" x2="395" y2="190" stroke="rgba(14,122,138,0.35)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ar)"/>
+        <line x1="306" y1="80" x2="420" y2="190" stroke="rgba(14,122,138,0.35)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ar)"/>
+        <line x1="486" y1="80" x2="482" y2="190" stroke="rgba(14,122,138,0.35)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ar)"/>
+        <line x1="666" y1="80" x2="562" y2="190" stroke="rgba(14,122,138,0.35)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ar)"/>
+        <line x1="186" y1="204" x2="370" y2="224" stroke="rgba(255,90,72,0.38)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="186" y1="297" x2="370" y2="254" stroke="rgba(255,90,72,0.38)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="774" y1="204" x2="590" y2="224" stroke="rgba(255,90,72,0.38)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="774" y1="297" x2="590" y2="254" stroke="rgba(255,90,72,0.38)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="176" y1="402" x2="415" y2="278" stroke="rgba(255,180,84,0.28)" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#ar)"/>
+        <line x1="348" y1="402" x2="448" y2="278" stroke="rgba(255,180,84,0.28)" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#ar)"/>
+        <line x1="520" y1="402" x2="504" y2="278" stroke="rgba(255,180,84,0.28)" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#ar)"/>
+        <line x1="692" y1="402" x2="562" y2="278" stroke="rgba(255,180,84,0.28)" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#ar)"/>
+        <rect x="4" y="438" width="7" height="7" rx="1" fill="rgba(14,122,138,0.62)"/><text x="16" y="446" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(200,220,240,0.3)">Data / Institutional</text>
+        <rect x="4" y="452" width="7" height="7" rx="1" fill="rgba(255,90,72,0.6)"/><text x="16" y="460" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(200,220,240,0.3)">Direct Customers</text>
+        <rect x="4" y="466" width="7" height="7" rx="1" fill="rgba(255,180,84,0.55)"/><text x="16" y="474" font-family="IBM Plex Mono" font-size="8.5" fill="rgba(200,220,240,0.3)">Partners / Enablers</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MATRIX ═══ -->
+<section id="matrix" class="short">
+  <div class="w rv">
+    <span class="eyebrow">Customer Segmentation Matrix</span>
+    <h2>Who pays. <span class="t-teal">Who decides.</span> Who benefits.</h2>
+    <p class="t-muted rv d1" style="font-size:.95rem;line-height:1.72;max-width:580px;margin:.5rem 0 0;">Mapped by urgency (Y) vs decision power (X). Hottest cell = start here.</p>
+    <div class="rv d1" style="margin-top:2.5rem;">
+      <div style="display:flex;gap:8px;margin-bottom:4px;padding-left:118px;">
+        <div style="flex:1;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);text-align:center;padding-bottom:.4rem;border-bottom:1px solid var(--card-border);">Low decision power</div>
+        <div style="flex:1;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);text-align:center;padding-bottom:.4rem;border-bottom:1px solid var(--teal);">High decision power →</div>
+      </div>
+      <div class="mx-row">
+        <div class="mx-row-lbl hi">High<br>urgency ↑</div>
+        <div class="mxcell warm"><div class="mxhd"><div class="mxdot a"></div><h4 class="a">Operations Manager</h4></div><p>Feels the pain every day. Influences buying but needs CFO approval. Ideal internal champion and demo target.</p><span class="mxtag">Contargo · HGK · RMS · daily scheduler</span></div>
+        <div class="mxcell primary"><div class="mxhd"><div class="mxdot r"></div><h4 class="r">CEO / COO · Freight Co.</h4></div><p>Accountable for fleet performance. Lived 2018 and 2022 losses. Highest willingness to pay. Signs the contract.</p><span class="mxtag">PRIMARY TARGET → pilot here first</span></div>
+      </div>
+      <div class="mx-row" style="margin-bottom:0;">
+        <div class="mx-row-lbl lo">Low<br>urgency</div>
+        <div class="mxcell cool"><div class="mxhd"><div class="mxdot t"></div><h4 class="t">CSO / ESG Officer</h4></div><p>CSRD &amp; Scope 3 urgency growing. Often becomes internal champion post-sale. Route to the climate narrative.</p><span class="mxtag">BASF · Industrials · 4PLs · regulators</span></div>
+        <div class="mxcell warm"><div class="mxhd"><div class="mxdot a"></div><h4 class="a">CFO · Risk Officer</h4></div><p>Controls budget. Needs ROI in euros. Converted after Ops Director experiences the product. Second signature.</p><span class="mxtag">Insurers · Finance · Enterprise procurement</span></div>
+      </div>
+      <div class="mxleg">
+        <span><div class="mxdot r" style="display:inline-block;margin:0;"></div>Primary — sell here first</span>
+        <span><div class="mxdot a" style="display:inline-block;margin:0;"></div>Warm — enable or convert</span>
+        <span><div class="mxdot t" style="display:inline-block;margin:0;"></div>Emerging — build over time</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ARCHETYPES ═══ -->
+<section id="archetypes" class="short">
+  <div class="w rv">
+    <span class="eyebrow">Customer Archetypes + JTBD</span>
+    <h2>Four buyers. <span style="font-style:italic;" class="t-teal">One shared pain.</span></h2>
+    <p class="t-muted rv d1" style="font-size:.95rem;line-height:1.72;max-width:580px;margin:.5rem 0 2rem;">Each archetype has a different job, a different fear, and a different pitch that lands.</p>
+    <div class="seg-tabs rv d1">
+      <button class="seg-tab active" data-s="ops" onclick="showP('ops')">Ops Director</button>
+      <button class="seg-tab" data-s="cfo" onclick="showP('cfo')">CFO / Finance</button>
+      <button class="seg-tab" data-s="cso" onclick="showP('cso')">CSO / Sustainability</button>
+      <button class="seg-tab" data-s="log" onclick="showP('log')">Logistics Manager</button>
+    </div>
+    <div class="persona on" id="p-ops"><div class="ps"><div class="ps-av" style="background:rgba(14,122,138,0.12);">🚢</div><div class="ps-name">Thomas Becker</div><div class="ps-role">Director of Operations · Contargo Rhine</div><div><span class="ps-tag" style="background:rgba(14,122,138,0.1);color:#0E7A8A;">Rhine Corridor</span><span class="ps-tag" style="background:rgba(14,122,138,0.1);color:#0E7A8A;">Fleet 40+</span></div><p class="ps-bio">Manages barge scheduling Rotterdam–Basel. Has lived through 2018 and 2022. His phone rings at 3am when Kaub drops below 40cm.</p></div><div class="pb"><div class="jsec"><span class="jlbl">Jobs to be done</span><div class="jr hire">Know 2–3 weeks ahead whether to pre-load or reroute</div><div class="jr hire">Communicate constraints before customers ask</div><div class="jr hire">Justify scheduling decisions with hard data</div></div><div class="jsec"><span class="jlbl">Pains</span><div class="jr pain">Current gauges give 48hr window — not enough to act</div><div class="jr pain">Each low-water event: €200K–€1M in idle fleet</div><div class="jr pain">No tool integrates river data + weather + forecasts</div></div><div class="jsec"><span class="jlbl">What success looks like</span><div class="jr gain">3 weeks notice = pre-position cargo, save €500K</div><div class="jr gain">One dashboard, daily AI briefing, zero setup</div><div class="jr gain">Hero to the CEO after the next crisis</div></div><div class="pitch"><span class="pitch-lbl">One-line pitch</span><p>"LogiRhein Live gives you three weeks instead of three days. That's the difference between protecting your schedule and reacting to a crisis you never saw coming."</p></div></div></div>
+    <div class="persona" id="p-cfo"><div class="ps"><div class="ps-av" style="background:rgba(255,180,84,0.12);">📊</div><div class="ps-name">Isabelle Renard</div><div class="ps-role">CFO · Mid-size Rhine Shipping Co.</div><div><span class="ps-tag" style="background:rgba(255,180,84,0.1);color:#B45309;">P&amp;L Owner</span><span class="ps-tag" style="background:rgba(255,180,84,0.1);color:#B45309;">ROI-driven</span></div><p class="ps-bio">Signs off on SaaS contracts. Needs cost avoidance in euros. Benchmarks every tool against the €1M+ lost in 2022.</p></div><div class="pb"><div class="jsec"><span class="jlbl">Jobs to be done</span><div class="jr hire">Reduce exposure to low-water revenue disruption</div><div class="jr hire">Quantify logistics risk in financial terms for board</div><div class="jr hire">Justify subscription cost vs measurable avoidance</div></div><div class="jsec"><span class="jlbl">Pains</span><div class="jr pain">2022: €1.2M in cancelled contracts + idle fleet</div><div class="jr pain">Insurance won't cover predictable disruptions</div><div class="jr pain">No tool to model future low-water scenarios</div></div><div class="jsec"><span class="jlbl">What success looks like</span><div class="jr gain">€12K/yr subscription avoids €500K loss = 40× ROI</div><div class="jr gain">Board-ready risk report generated quarterly</div><div class="jr gain">Insurance premium reduced via documented warnings</div></div><div class="pitch"><span class="pitch-lbl">One-line pitch</span><p>"One avoided low-water event pays for 40 years of subscription. LogiRhein Live doesn't cost money — it removes climate disruption from your P&amp;L."</p></div></div></div>
+    <div class="persona" id="p-cso"><div class="ps"><div class="ps-av" style="background:rgba(74,222,128,0.1);">🌱</div><div class="ps-name">Henrik Müller</div><div class="ps-role">CSO · BASF Logistics</div><div><span class="ps-tag" style="background:rgba(22,163,74,0.1);color:#16a34a;">Scope 3</span><span class="ps-tag" style="background:rgba(22,163,74,0.1);color:#16a34a;">EU CSRD</span></div><p class="ps-bio">Under pressure for CSRD Scope 3 reporting. Knows disruptions force road rerouting — 3–5× the CO₂ of river freight.</p></div><div class="pb"><div class="jsec"><span class="jlbl">Jobs to be done</span><div class="jr hire">Demonstrate climate-resilient logistics to regulators</div><div class="jr hire">Reduce road rerouting — 3–5× the CO₂</div><div class="jr hire">Include waterway risk in CSRD reporting</div></div><div class="jsec"><span class="jlbl">Pains</span><div class="jr pain">Can't quantify avoided emissions from smart scheduling</div><div class="jr pain">2022 rerouting added 40% to Scope 3 that quarter</div><div class="jr pain">ESG investors asking for climate resilience evidence</div></div><div class="jsec"><span class="jlbl">What success looks like</span><div class="jr gain">Avoided rerouting = documented CO₂ in annual report</div><div class="jr gain">CSRD-ready data on waterway climate exposure</div><div class="jr gain">Narrative of proactive adaptation, not reaction</div></div><div class="pitch"><span class="pitch-lbl">One-line pitch</span><p>"Every avoided rerouting is a documented Scope 3 saving. LogiRhein Live turns climate risk into a measurable resilience story for your ESG report."</p></div></div></div>
+    <div class="persona" id="p-log"><div class="ps"><div class="ps-av" style="background:rgba(255,90,72,0.1);">📦</div><div class="ps-name">Annika van der Berg</div><div class="ps-role">Logistics Manager · Port de Strasbourg</div><div><span class="ps-tag" style="background:rgba(255,90,72,0.1);color:#DC2626;">TEN-T junction</span><span class="ps-tag" style="background:rgba(255,90,72,0.1);color:#DC2626;">Multi-modal</span></div><p class="ps-bio">Coordinates inbound barges with rail and road. Her pain is the cascade — when the river drops, everything backs up at once.</p></div><div class="pb"><div class="jsec"><span class="jlbl">Jobs to be done</span><div class="jr hire">Pre-coordinate rail/road before barge volumes drop</div><div class="jr hire">Notify industrial clients of delays 2+ weeks out</div><div class="jr hire">Justify infrastructure investment with long forecasts</div></div><div class="jsec"><span class="jlbl">Pains</span><div class="jr pain">Rail slots booked weeks out — needs same window</div><div class="jr pain">Client calls spike exactly when congestion peaks</div><div class="jr pain">Current data: daily gauge reading, no forecast</div></div><div class="jsec"><span class="jlbl">What success looks like</span><div class="jr gain">Proactive client emails sent before clients call</div><div class="jr gain">Rail pre-booking aligned to barge shortage windows</div><div class="jr gain">Port throughput smooth even during low-water crises</div></div><div class="pitch"><span class="pitch-lbl">One-line pitch</span><p>"LogiRhein Live lets you pre-book rail before your clients know they'll need it. You stop being reactive. You become the smartest node in the corridor."</p></div></div></div>
+  </div>
+</section>
+
+<!-- ═══ JOURNEY ═══ -->
+<section id="journey" class="short">
+  <div style="max-width:1060px;" class="rv">
+    <span class="eyebrow">Customer Journey Map</span>
+    <h2>From crisis memory to <span class="t-teal">always-on intelligence.</span></h2>
+    <span class="t-very-muted rv d1" style="font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;display:block;margin:.8rem 0 1.8rem;">Scroll right → Awareness · Evaluation · Pilot · Scale · Global</span>
+  </div>
+  <div class="jscroll rv d1">
+    <div class="jrail">
+      <div class="jstep ja"><div class="jdot"></div><div class="jphase">Awareness</div><div class="jcard"><h4>Pain surfaces</h4><ul><li>Kaub event → €500K loss</li><li>CEO: "why no warning?"</li><li>Team searches for tools</li></ul><div class="jq">"There must be something better than a gauge."</div></div></div>
+      <div class="jstep ja"><div class="jdot"></div><div class="jphase">Discovery</div><div class="jcard"><h4>Finding LogiRhein</h4><ul><li>CCNR conference mention</li><li>Peer operator referral</li><li>LinkedIn / search</li></ul><div class="jq">"Someone at the port uses LogiRhein Live."</div></div></div>
+      <div class="jstep je"><div class="jdot"></div><div class="jphase">Evaluation</div><div class="jcard"><h4>Demo moment</h4><ul><li>Live Kaub gauge demo</li><li>2018/2022 retrospective</li><li>ROI calculator</li></ul><div class="jq">"If this existed in 2022, we'd have saved €1M."</div></div></div>
+      <div class="jstep je"><div class="jdot"></div><div class="jphase">Decision</div><div class="jcard"><h4>Internal champion</h4><ul><li>Ops builds business case</li><li>CFO approves pilot</li><li>IT sign-off</li></ul><div class="jq">"Not buying is the bigger risk."</div></div></div>
+      <div class="jstep jp"><div class="jdot"></div><div class="jphase">Pilot</div><div class="jcard"><h4>Rhine go-live</h4><ul><li>3-month Strasbourg pilot</li><li>Alerts + briefings live</li><li>First early warning</li></ul><div class="jq">"Alert came 18 days before the drop."</div></div></div>
+      <div class="jstep jp"><div class="jdot"></div><div class="jphase">Full rollout</div><div class="jcard"><h4>Fleet-wide</h4><ul><li>All vessels on-boarded</li><li>API to TMS connected</li><li>Multi-user live</li></ul><div class="jq">"We want this for the whole fleet."</div></div></div>
+      <div class="jstep js2"><div class="jdot"></div><div class="jphase">Advocacy</div><div class="jcard"><h4>Reference customer</h4><ul><li>Speaks at CCNR event</li><li>Refers 2 peers</li><li>Joint case study</li></ul><div class="jq">"Cheapest insurance I've ever bought."</div></div></div>
+      <div class="jstep js2"><div class="jdot"></div><div class="jphase">Corridor+</div><div class="jcard"><h4>Danube request</h4><ul><li>Requests new river</li><li>Multi-corridor plan</li><li>Expansion roadmap</li></ul><div class="jq">"We operate on three rivers."</div></div></div>
+      <div class="jstep jg"><div class="jdot"></div><div class="jphase">Global</div><div class="jcard"><h4>World-class partner</h4><ul><li>Global contract signed</li><li>Yangtze · Mississippi</li><li>Borderless intelligence</li></ul><div class="jq">"LogiRhein is our global risk layer."</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STRATEGY ═══ -->
+<section id="strategy" class="short">
+  <div class="w rv">
+    <span class="eyebrow">Strategic Plan</span>
+    <h2>Three horizons. <span style="font-style:italic;" class="t-crisis">One direction.</span></h2>
+    <p class="t-muted rv d1" style="font-size:.95rem;line-height:1.72;max-width:560px;margin:.5rem 0 0;">Defend the Rhine. Expand Europe. Own the world. Every horizon funds the next.</p>
+    <div class="hz-row rv d1">
+      <div class="hz hz1"><div class="hz-hd"><div class="hz-num">H1</div><div class="hz-title">Defend &amp; Prove</div><div class="hz-period">2026 — Rhine Corridor Beachhead</div></div><div class="hz-body"><p class="hz-goal">Lock in the Rhine as the world's best-instrumented inland waterway. Irrefutable proof with Contargo and Port de Strasbourg.</p><ul class="hz-kpis"><li>Pilot customers <span class="kv">3</span></li><li>ARR target <span class="kv">€100K</span></li><li>Prediction accuracy <span class="kv">&gt;80%</span></li><li>CEF Transport <span class="kv">Apply</span></li><li>CCNR MOU <span class="kv">Sign</span></li></ul></div></div>
+      <div class="hz hz2"><div class="hz-hd"><div class="hz-num">H2</div><div class="hz-title">Expand &amp; Standardise</div><div class="hz-period">2027–2028 — European Waterways</div></div><div class="hz-body"><p class="hz-goal">Replicate on Danube, Elbe, Moselle. Each corridor is a software deployment, not a research project. Platform layer complete.</p><ul class="hz-kpis"><li>Active corridors <span class="kv">5</span></li><li>ARR target <span class="kv">€750K</span></li><li>Enterprise contracts <span class="kv">8+</span></li><li>TMS/ERP integrations <span class="kv">Live</span></li><li>Team size <span class="kv">12–18</span></li></ul></div></div>
+      <div class="hz hz3"><div class="hz-hd"><div class="hz-num">H3</div><div class="hz-title">Scale &amp; Globalise</div><div class="hz-period">2029–2030 — Global Corridors</div></div><div class="hz-body"><p class="hz-goal">Every inland waterway and maritime chokepoint. The Bloomberg of global freight intelligence. Series A funding round.</p><ul class="hz-kpis"><li>Global corridors <span class="kv">20+</span></li><li>ARR target <span class="kv">€5M+</span></li><li>Enterprise clients <span class="kv">50+</span></li><li>Funding round <span class="kv">Series A</span></li><li>Team size <span class="kv">40+</span></li></ul></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GLOBAL ═══ -->
+<section id="global" class="short">
+  <div class="w rv">
+    <span class="eyebrow">Global Expansion Roadmap</span>
+    <h2>Every waterway. <span style="font-style:italic;" class="t-teal2">No blind spots.</span></h2>
+    <p class="t-muted rv d1" style="font-size:.95rem;line-height:1.72;max-width:560px;margin:.5rem 0 0;">The Rhine is proof. The world is the market.</p>
+    <div class="tl rv d1">
+      <div class="tr"><div class="tdot"></div><span class="ty">2026 · Now</span><div class="tc"><h3>Rhine Corridor Beachhead</h3><p>Strasbourg anchor. First 3 paying enterprise customers. Commercial proof on the world's most at-risk inland waterway.</p><div class="tmkts"><span class="tm">Rotterdam</span><span class="tm" style="border-color:#0E7A8A;color:#0E7A8A;">Strasbourg ◀</span><span class="tm">Basel</span><span class="tm">Duisburg</span></div></div></div>
+      <div class="tr"><div class="tdot"></div><span class="ty">2027 · Year 2</span><div class="tc"><h3>European Waterway Network</h3><p>Adjacent waterways driven by existing enterprise customers. Platform-first: each corridor deploys in weeks, not years.</p><div class="tmkts"><span class="tm">Danube</span><span class="tm">Elbe</span><span class="tm">Moselle</span><span class="tm">Main–Danube</span><span class="tm">Seine</span></div></div></div>
+      <div class="tr"><div class="tdot"></div><span class="ty">2028–2029 · Year 3–4</span><div class="tc"><h3>Critical Global Chokepoints</h3><p>Maritime chokepoints next. The 2026 Hormuz crisis proved the market: every operator needs chokepoint intelligence, not just river data.</p><div class="tmkts"><span class="tm">Suez</span><span class="tm">Hormuz</span><span class="tm">Mississippi</span><span class="tm">St. Lawrence</span><span class="tm">Paraná</span></div></div></div>
+      <div class="tr"><div class="tdot"></div><span class="ty">2030 · Horizon 3</span><div class="tc"><h3>Borderless Logistics Intelligence Platform</h3><p>The Bloomberg terminal for global freight. Every corridor, every chokepoint, every risk — unified. Series A complete.</p><div class="tmkts"><span class="tm">Yangtze</span><span class="tm">Ganges</span><span class="tm">Amazon</span><span class="tm">Niger</span><span class="tm">Global API</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section id="cta" style="min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem;">
+  <div class="cta-inner rv">
+    <span class="eyebrow" style="justify-content:center;">The ask</span>
+    <h2>Be first.<br><span class="t-crisis" style="font-style:italic;">Before the next crisis.</span></h2>
+    <p style="font-size:1rem;line-height:1.78;max-width:500px;margin:1.2rem auto 2.8rem;">The next low-water event is already forming. The next Hormuz-level shock is a matter of when, not if. Operators who act now will never be caught off-guard again.</p>
+    <a class="cta-btn" href="mailto:contact@logirheinlive.com">Request a Pilot →</a>
+    <div class="cta-meta">Strasbourg · Rotterdam · Basel · Global · 2026</div>
+  </div>
+</section>
+
+<footer>
+  <span>LogiRhein Live · Corporate Strategy 2026–2030</span>
+  <span>Confidential · ISU Strasbourg · Factory 2026</span>
+  <span>Copernicus · ERA5 · Pegelonline</span>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════
+   COLOUR RIVER ENGINE
+   Defines colour stops keyed to scroll fraction 0→1
+   JS interpolates RGB every rAF tick
+════════════════════════════════════════════════════ */
+const STOPS = [
+  // [scrollFraction, bgR,bgG,bgB,  fgR,fgG,fgB,  phase]
+  [0.00,  13, 26, 38,  240,237,232, 'dark'],   // deep navy
+  [0.08,  11, 28, 44,  240,237,232, 'dark'],   // pillars — navy-teal
+  [0.18,  10, 32, 50,  240,237,232, 'dark'],   // ecosystem — deeper blue
+  [0.28,  12, 34, 52,  240,237,232, 'dark'],   // matrix
+  [0.40,  30, 60, 90,  240,237,232, 'dark'],   // transition mid-blue
+  [0.50,  90,145,175,  240,237,232, 'mid'],    // start going light
+  [0.58, 185,215,230,   15, 30, 42, 'light'],  // archetypes — light blue
+  [0.68, 220,232,240,   15, 30, 42, 'light'],  // journey
+  [0.76, 238,244,248,   15, 30, 42, 'light'],  // strategy
+  [0.85, 248,251,253,   15, 30, 42, 'light'],  // global
+  [1.00, 255,255,255,   15, 30, 42, 'light'],  // CTA white
+];
+
+function lerp(a,b,t){ return a + (b-a)*t; }
+
+function getColour(fraction) {
+  let lo = STOPS[0], hi = STOPS[STOPS.length-1];
+  for(let i=0; i<STOPS.length-1; i++){
+    if(fraction >= STOPS[i][0] && fraction <= STOPS[i+1][0]){
+      lo = STOPS[i]; hi = STOPS[i+1]; break;
+    }
+  }
+  const range = hi[0]-lo[0];
+  const t = range===0 ? 0 : (fraction-lo[0])/range;
+  const bg = [lerp(lo[1],hi[1],t), lerp(lo[2],hi[2],t), lerp(lo[3],hi[3],t)];
+  const fg = [lerp(lo[4],hi[4],t), lerp(lo[5],hi[5],t), lerp(lo[6],hi[6],t)];
+  const phase = t < 0.5 ? lo[7] : hi[7];
+  return {bg, fg, phase};
+}
+
+let ticking = false;
+function onScroll(){
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const fraction = maxScroll > 0 ? Math.min(1, window.scrollY / maxScroll) : 0;
+      const {bg, fg, phase} = getColour(fraction);
+      const body = document.body;
+      body.style.backgroundColor = `rgb(${bg[0]|0},${bg[1]|0},${bg[2]|0})`;
+      body.style.color = `rgb(${fg[0]|0},${fg[1]|0},${fg[2]|0})`;
+      // Update CSS vars for adaptive components
+      const isDark = phase==='dark' || phase==='mid';
+      const alpha = isDark ? 0.55 : 0.55;
+      body.style.setProperty('--fg',  `rgb(${fg[0]|0},${fg[1]|0},${fg[2]|0})`);
+      body.style.setProperty('--fg2', isDark ? `rgba(${fg[0]|0},${fg[1]|0},${fg[2]|0},0.55)` : `rgba(74,96,112,1)`);
+      body.style.setProperty('--fg3', isDark ? `rgba(${fg[0]|0},${fg[1]|0},${fg[2]|0},0.28)` : `rgba(15,30,42,0.35)`);
+      body.style.setProperty('--card-bg',     isDark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.75)');
+      body.style.setProperty('--card-border', isDark ? 'rgba(240,237,232,0.1)'  : 'rgba(15,30,42,0.1)');
+      body.style.setProperty('--eyebrow-col', isDark ? '#FF5A48' : '#0E7A8A');
+      body.classList.remove('phase-dark','phase-mid','phase-light');
+      body.classList.add('phase-'+phase);
+      updateDots(fraction);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ─── NAV DOTS ─── */
+const sectionIds = ['hero','pillars','stakeholders','matrix','archetypes','journey','strategy','global','cta'];
+const dots = sectionIds.map((_,i)=>document.getElementById('d'+i));
+function updateDots(frac){
+  const mid = window.scrollY + window.innerHeight/2;
+  sectionIds.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    dots[i]?.classList.toggle('lit', mid >= el.offsetTop && mid < el.offsetTop + el.offsetHeight);
+  });
+}
+function go(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); return false; }
+
+/* ─── PERSONA TABS ─── */
+function showP(id){
+  document.querySelectorAll('.persona').forEach(c=>c.classList.remove('on'));
+  document.querySelectorAll('.seg-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('p-'+id)?.classList.add('on');
+  document.querySelector('[data-s="'+id+'"]')?.classList.add('active');
+}
+
+/* ─── REVEAL ON SCROLL ─── */
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:0.07});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
